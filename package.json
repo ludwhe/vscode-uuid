@@ -13,6 +13,9 @@
   },
   "author": "ludwhe",
   "license": "ISC",
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/node": "^16.11.6",
@@ -40,11 +43,9 @@
       ]
     }
   },
-  "displayName": "UUID",
+  "displayName": "UUID Generator",
   "engines": {
     "vscode": "^1.22.0"
   },
-  "dependencies": {
-    "uuid": "^8.3.2"
-  }
+  "publisher": "ludwhe"
 }
