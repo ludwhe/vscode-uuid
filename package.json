@@ -1,0 +1,50 @@
+{
+  "name": "vscode-uuid",
+  "version": "1.0.0",
+  "description": "A VS Code extension to generate UUIDs.",
+  "main": "dist/extension.js",
+  "browser": "dist/extension.js",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "node ./dist/test/runTest.js",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "author": "ludwhe",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/node": "^16.11.6",
+    "@types/uuid": "^8.3.1",
+    "@types/vscode": "^1.61.0",
+    "@vscode/test-electron": "^1.6.2",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
+  },
+  "activationEvents": [
+    "onCommand:vscodeUUID.generateUUID"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscodeUUID.generateUUID",
+        "title": "Generate UUID"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "vscodeUUID.generateUUID"
+        }
+      ]
+    }
+  },
+  "displayName": "UUID",
+  "engines": {
+    "vscode": "^1.22.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
