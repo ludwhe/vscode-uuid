@@ -1,0 +1,8 @@
+{
+    "vscodeUUID.generateUUID.title": "Générer un nouvel UUID",
+    "vscodeUUID.UUIDVersion.description": "Spécifie le type d'UUID à générer.",
+    "vscodeUUID.UUIDVersion.v1Description": "Génère des UUIDs basés sur l'adresse MAC, la date et l'heure (UUIDv1)",
+    "vscodeUUID.UUIDVersion.v3Description": "Génère des UUIDs basés sur des espaces de noms (MD5, UUIDv3)",
+    "vscodeUUID.UUIDVersion.v4Description": "Génère des UUIDs aléatoires (UUIDv4)",
+    "vscodeUUID.UUIDVersion.v5Description": "Génère des UUIDs basés sur des espaces de noms (SHA-1, UUIDv5)"
+}

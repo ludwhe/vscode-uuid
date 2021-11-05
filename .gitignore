@@ -128,3 +128,9 @@ dist
 
 # Local History for Visual Studio Code
 .history/
+
+# Visual Studio Code extension i18n
+!i18n/*/dist/
+
+# Visual Studio Code extension package
+*.vsix

@@ -4,17 +4,25 @@
   "description": "A VS Code extension to generate UUIDs.",
   "main": "dist/extension.js",
   "browser": "dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ludwhe/vscode-uuid.git"
+  },
   "scripts": {
     "pretest": "npm run build",
     "test": "node ./dist/test/runTest.js",
-    "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "vscode:prepublish": "npm run package"
   },
   "author": "ludwhe",
   "license": "ISC",
   "dependencies": {
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "vscode-nls": "^5.0.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
@@ -22,8 +30,13 @@
     "@types/uuid": "^8.3.1",
     "@types/vscode": "^1.61.0",
     "@vscode/test-electron": "^1.6.2",
+    "ts-loader": "^9.2.6",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "vsce": "^2.2.0",
+    "vscode-nls-dev": "^3.3.2",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
   },
   "activationEvents": [
     "onCommand:vscodeUUID.generateUUID"
@@ -31,10 +44,33 @@
   "contributes": {
     "commands": [
       {
+        "category": "UUID",
         "command": "vscodeUUID.generateUUID",
-        "title": "Generate UUID"
+        "title": "%vscodeUUID.generateUUID.title%"
       }
     ],
+    "configuration": {
+      "title": "UUID Generator",
+      "properties": {
+        "vscodeUUID.UUIDVersion": {
+          "description": "%vscodeUUID.UUIDVersion.description%",
+          "type": "string",
+          "default": "v4",
+          "enum": [
+            "v1",
+            "v3",
+            "v4",
+            "v5"
+          ],
+          "enumDescriptions": [
+            "%vscodeUUID.UUIDVersion.v1Description%",
+            "%vscodeUUID.UUIDVersion.v3Description%",
+            "%vscodeUUID.UUIDVersion.v4Description%",
+            "%vscodeUUID.UUIDVersion.v5Description%"
+          ]
+        }
+      }
+    },
     "menus": {
       "commandPalette": [
         {
@@ -45,7 +81,7 @@
   },
   "displayName": "UUID Generator",
   "engines": {
-    "vscode": "^1.22.0"
+    "vscode": "^1.61.0"
   },
   "publisher": "ludwhe"
 }

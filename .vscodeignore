@@ -1,0 +1,8 @@
+.gitignore
+.vscode
+node_modules
+src/
+dist/
+!dist/extension.js
+tsconfig.json
+webpack.config.js
