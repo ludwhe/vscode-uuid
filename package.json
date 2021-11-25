@@ -1,9 +1,8 @@
 {
   "name": "vscode-uuid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A VS Code extension to generate UUIDs.",
   "main": "dist/extension.js",
-  "browser": "dist/extension.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ludwhe/vscode-uuid.git"

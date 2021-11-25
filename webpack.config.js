@@ -7,7 +7,7 @@ const webpack = require('webpack');
 
 /**@type {import('webpack').Configuration}*/
 const config = {
-    target: 'webworker', // vscode extensions run in webworker context for VS Code web 📖 -> https://webpack.js.org/configuration/target/#target
+    target: 'node', // vscode extensions run in webworker context for VS Code web 📖 -> https://webpack.js.org/configuration/target/#target
     entry: './src/extension.ts', // the entry point of this extension, 📖 -> https://webpack.js.org/configuration/entry-context/
     output: {
         // the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/
@@ -25,7 +25,6 @@ const config = {
         mainFields: ['browser', 'module', 'main'], // look for `browser` entry point in imported node modules
         extensions: ['.ts', '.js'],
         alias: {
-            // provides alternate implementation for node module and source files
         },
         fallback: {
             // Webpack 5 no longer polyfills Node.js core modules automatically.
