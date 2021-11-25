@@ -46,4 +46,15 @@ const config = {
         ]
     }
 };
-module.exports = config;
+
+/**@type {import('webpack').Configuration}*/
+const browserConfig = {
+    ...config,
+    target: 'webworker',
+    output: {
+        ...config.output,
+        path: path.resolve(__dirname, 'dist/web')
+    }
+}
+
+module.exports = [config, browserConfig];

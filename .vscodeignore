@@ -4,5 +4,6 @@ node_modules/
 src/
 dist/
 !dist/extension.js
+!dist/web/extension.js
 tsconfig.json
 webpack.config.js

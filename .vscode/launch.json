@@ -32,6 +32,21 @@
                 "${workspaceFolder}/dist/**/*.js"
             ],
             "preLaunchTask": "npm: package"
+        },
+        {
+            "name": "Run Web extension",
+            "type": "pwa-extensionHost",
+            "debugWebWorkerHost": true,
+            "request": "launch",
+            "args": [
+                "--disable-extensions",
+                "--extensionDevelopmentPath=${workspaceFolder}",
+                "--extensionDevelopmentKind=web"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/dist/web/**/*.js"
+            ],
+            "preLaunchTask": "npm: package"
         }
     ]
 }
