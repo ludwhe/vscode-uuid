@@ -1,6 +1,6 @@
 .gitignore
-.vscode
-node_modules
+.vscode/
+node_modules/
 src/
 dist/
 !dist/extension.js

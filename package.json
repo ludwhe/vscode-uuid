@@ -1,6 +1,6 @@
 {
   "name": "vscode-uuid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A VS Code extension to generate UUIDs.",
   "main": "dist/extension.js",
   "browser": "dist/extension.js",
@@ -46,14 +46,14 @@
       {
         "category": "UUID",
         "command": "vscodeUUID.generateUUID",
-        "title": "%vscodeUUID.generateUUID.title%"
+        "title": "Generate new UUID"
       }
     ],
     "configuration": {
       "title": "UUID Generator",
       "properties": {
         "vscodeUUID.UUIDVersion": {
-          "description": "%vscodeUUID.UUIDVersion.description%",
+          "description": "Specifies the type of UUID to generate.",
           "type": "string",
           "default": "v4",
           "enum": [
@@ -63,10 +63,10 @@
             "v5"
           ],
           "enumDescriptions": [
-            "%vscodeUUID.UUIDVersion.v1Description%",
-            "%vscodeUUID.UUIDVersion.v3Description%",
-            "%vscodeUUID.UUIDVersion.v4Description%",
-            "%vscodeUUID.UUIDVersion.v5Description%"
+            "Generates MAC-address-and-timestamp- based (UUIDv1) UUIDs",
+            "Generates namespace name-based (MD5, UUIDv3) UUIDs",
+            "Generates random (UUIDv4) UUIDs",
+            "Generates namespace name-based (SHA-1, UUIDv5) UUIDs"
           ]
         }
       }
