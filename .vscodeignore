@@ -6,4 +6,5 @@ dist/
 !dist/extension.js
 !dist/web/extension.js
 tsconfig.json
-webpack.config.js
+webpack.config.ts
+.eslintrc.json

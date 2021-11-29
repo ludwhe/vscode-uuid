@@ -1,7 +1,8 @@
 import * as uuid from 'uuid';
-import { commands, ExtensionContext, TextEditor, TextEditorEdit, workspace, window } from 'vscode';
+import { commands, ExtensionContext, TextEditor, workspace, window } from 'vscode';
 
 type UUIDVersion = `v${1 | 3 | 4 | 5}`;
+type UUIDCase = 'lower' | 'upper';
 
 function getUUIDv35Name() {
     return window.showInputBox({
@@ -45,16 +46,22 @@ export function activate(context: ExtensionContext) {
     const command = 'vscodeUUID.generateUUID';
 
     // we can't use the provided TextEditorEdit as the new value is computed asynchronously.
-    const commandHandler = async (textEditor: TextEditor, _: TextEditorEdit) => {
-        const uuidVersion = workspace.getConfiguration('vscodeUUID').get('UUIDVersion') as UUIDVersion;
+    const commandHandler = async (textEditor: TextEditor) => {
+        const configuration = workspace.getConfiguration('vscodeUUID');
+        const uuidVersion = configuration.get('UUIDVersion') as UUIDVersion;
+        const uuidCase = configuration.get('case') as UUIDCase;
 
-        for (let selection of textEditor.selections) {
-            const newUUID = await generateUUID(uuidVersion);
+        for (const selection of textEditor.selections) {
+            let newUUID = await generateUUID(uuidVersion);
             if (newUUID == null) return;
 
+            if (uuidCase === 'upper') newUUID = newUUID.toUpperCase();
+
             await textEditor.edit(edit => {
-                selection.isEmpty ? edit.insert(selection.active, newUUID) :
-                    edit.replace(selection, newUUID);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                selection.isEmpty ? edit.insert(selection.active, newUUID!) :
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    edit.replace(selection, newUUID!);
             });
         }
     };
