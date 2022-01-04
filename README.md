@@ -1,6 +1,6 @@
 # UUID Generator
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md) [![CI](https://github.com/ludwhe/vscode-uuid/actions/workflows/ci.yml/badge.svg)](https://github.com/ludwhe/vscode-uuid/actions/workflows/ci.yml)
 
 A VS Code extension to generate UUIDs.
 
