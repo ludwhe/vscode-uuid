@@ -3,6 +3,7 @@ import { commands, ExtensionContext, TextEditor, workspace, window } from 'vscod
 
 type UUIDVersion = `v${1 | 3 | 4 | 5}`;
 type UUIDCase = 'lower' | 'upper';
+type UUIDMultiCursorBehavior = 'unique' | 'repeat';
 
 function getUUIDv35Name() {
     return window.showInputBox({
@@ -50,9 +51,14 @@ export function activate(context: ExtensionContext) {
         const configuration = workspace.getConfiguration('vscodeUUID');
         const uuidVersion = configuration.get('UUIDVersion') as UUIDVersion;
         const uuidCase = configuration.get('case') as UUIDCase;
+        const multiCursorBehavior = configuration.get('multiCursorBehavior') as UUIDMultiCursorBehavior;
 
-        for (const selection of textEditor.selections) {
-            let newUUID = await generateUUID(uuidVersion);
+        let newUUID = await generateUUID(uuidVersion);
+        for (const [index, selection] of textEditor.selections.entries()) {
+            if (index > 0 && multiCursorBehavior == 'unique') {
+                newUUID = await generateUUID(uuidVersion);
+            }
+
             if (newUUID == null) return;
 
             if (uuidCase === 'upper') newUUID = newUUID.toUpperCase();

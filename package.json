@@ -84,6 +84,19 @@
             "Generates lowercase UUIDs.",
             "Generates uppercase UUIDs."
           ]
+        },
+        "vscodeUUID.multiCursorBehavior": {
+          "description": "Specifies the UUID generation behavior when multiple cursor are active.",
+          "type": "string",
+          "default": "unique",
+          "enum": [
+            "unique",
+            "repeat"
+          ],
+          "enumDescriptions": [
+            "Generates a unique UUID for each cursor",
+            "Repeats the same UUID across cursors"
+          ]
         }
       }
     },
