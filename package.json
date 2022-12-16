@@ -22,24 +22,24 @@
   "author": "ludwhe",
   "license": "ISC",
   "dependencies": {
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
-    "@types/node": "^17.0.14",
-    "@types/uuid": "^8.3.4",
-    "@types/vscode": "^1.63.1",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
-    "@vscode/test-electron": "^2.1.1",
-    "eslint": "^8.8.0",
-    "ts-loader": "^9.2.6",
-    "ts-node": "^10.4.0",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.5",
+    "@types/node": "^18.11.15",
+    "@types/uuid": "^9.0.0",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "@vscode/test-electron": "^2.2.1",
+    "eslint": "^8.29.0",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4",
     "vsce": "^2.6.6",
-    "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "activationEvents": [
     "onCommand:vscodeUUID.generateUUID"
@@ -110,7 +110,7 @@
   },
   "displayName": "UUID Generator",
   "engines": {
-    "vscode": "^1.63.1"
+    "vscode": "^1.74.0"
   },
   "publisher": "ludwhe"
 }
