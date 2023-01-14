@@ -50,6 +50,11 @@
         "category": "UUID",
         "command": "vscodeUUID.generateUUID",
         "title": "Generate new UUID"
+      },
+      {
+        "category": "UUID",
+        "command": "vscodeUUID.generateUUIDWithVersion",
+        "title": "Generate new UUID with version"
       }
     ],
     "configuration": {
