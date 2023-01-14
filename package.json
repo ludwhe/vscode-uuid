@@ -1,6 +1,6 @@
 {
   "name": "vscode-uuid",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A VS Code extension to generate UUIDs.",
   "main": "dist/extension.js",
   "browser": "dist/web/extension.js",
