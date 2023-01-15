@@ -1,7 +1,7 @@
 {
   "name": "vscode-uuid",
   "version": "1.0.8",
-  "description": "A VS Code extension to generate UUIDs.",
+  "description": "Generates UUIDs (v1, v3, v4, v5) inside your editor.",
   "main": "dist/extension.js",
   "browser": "dist/web/extension.js",
   "icon": "icon.png",
@@ -109,6 +109,9 @@
       "commandPalette": [
         {
           "command": "vscodeUUID.generateUUID"
+        },
+        {
+          "command": "vscodeUUID.generateUUIDWithVersion"
         }
       ]
     }

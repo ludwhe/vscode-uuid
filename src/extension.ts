@@ -45,7 +45,7 @@ function getUUIDVersion() {
             "Generates namespace name-based (SHA-1, UUIDv5) UUIDs"
         ][i]
     })), {
-        placeHolder: 'UUID version to generate',
+        placeHolder: 'Type of UUID to generate',
         canPickMany: false
     });
 }
