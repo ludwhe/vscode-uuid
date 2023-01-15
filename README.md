@@ -6,8 +6,6 @@ Generates UUIDs of any type supported by [uuidjs](https://github.com/uuidjs/uuid
 
 ## Features
 
-Generates UUIDs of any type supported by [uuidjs](https://github.com/uuidjs/uuid) (v1, v3, v4, v5) inside your editor.
-
 - Supports "heavy" as well as Web Visual Studio Code ;
 - Supports multi-cursor edition with a configurable behavior: either `unique` (generate a UUID for each cursor) or `repeat` (generate a UUID to repeat across cursors) ;
 - Configurable casing (`lower` or `upper`) ;
