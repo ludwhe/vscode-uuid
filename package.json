@@ -1,8 +1,8 @@
 {
   "activationEvents": [
+    "onCommand:vscodeUUID.generateNilUUID",
     "onCommand:vscodeUUID.generateUUID",
-    "onCommand:vscodeUUID.generateUUIDWithVersion",
-    "onCommand:vscodeUUID.generateNilUUID"
+    "onCommand:vscodeUUID.generateUUIDWithVersion"
   ],
   "author": "ludwhe",
   "browser": "dist/web/extension.js",
