@@ -1,29 +1,95 @@
 {
-  "name": "vscode-uuid",
-  "version": "1.0.9",
-  "description": "Generates UUIDs (v1, v3, v4, v5) inside your editor.",
-  "main": "dist/extension.js",
-  "browser": "dist/web/extension.js",
-  "icon": "icon.png",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ludwhe/vscode-uuid.git"
-  },
-  "scripts": {
-    "pretest": "npm run build",
-    "test": "node ./dist/test/runTest.js",
-    "build": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "webpack": "webpack --mode development",
-    "webpack-dev": "webpack --mode development --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "vscode:prepublish": "npm run package"
-  },
+  "activationEvents": [
+    "onCommand:vscodeUUID.generateUUID",
+    "onCommand:vscodeUUID.generateUUIDWithVersion",
+    "onCommand:vscodeUUID.generateNilUUID"
+  ],
   "author": "ludwhe",
-  "license": "ISC",
+  "browser": "dist/web/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "category": "UUID",
+        "command": "vscodeUUID.generateNilUUID",
+        "title": "Generate nil UUID"
+      },
+      {
+        "category": "UUID",
+        "command": "vscodeUUID.generateUUID",
+        "title": "Generate new UUID"
+      },
+      {
+        "category": "UUID",
+        "command": "vscodeUUID.generateUUIDWithVersion",
+        "title": "Generate new UUID with version"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "vscodeUUID.case": {
+          "default": "lower",
+          "description": "Specifies the case to generate the UUID in.",
+          "enum": [
+            "lower",
+            "upper"
+          ],
+          "enumDescriptions": [
+            "Generates lowercase UUIDs.",
+            "Generates uppercase UUIDs."
+          ],
+          "type": "string"
+        },
+        "vscodeUUID.multiCursorBehavior": {
+          "default": "unique",
+          "description": "Specifies the UUID generation behavior when multiple cursor are active.",
+          "enum": [
+            "unique",
+            "repeat"
+          ],
+          "enumDescriptions": [
+            "Generates a unique UUID for each cursor",
+            "Repeats the same UUID across cursors"
+          ],
+          "type": "string"
+        },
+        "vscodeUUID.UUIDVersion": {
+          "default": "v4",
+          "description": "Specifies the type of UUID to generate.",
+          "enum": [
+            "v1",
+            "v3",
+            "v4",
+            "v5"
+          ],
+          "enumDescriptions": [
+            "Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs",
+            "Generates namespace-and-name-based (MD5, UUIDv3) UUIDs",
+            "Generates random (UUIDv4) UUIDs",
+            "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "UUID Generator"
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "vscodeUUID.generateNilUUID"
+        },
+        {
+          "command": "vscodeUUID.generateUUID"
+        },
+        {
+          "command": "vscodeUUID.generateUUIDWithVersion"
+        }
+      ]
+    }
+  },
   "dependencies": {
     "uuid": "^9.0.0"
   },
+  "description": "Generates UUIDs (v1, v3, v4, v5) inside your editor.",
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/node": "^18.11.15",
@@ -41,92 +107,33 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   },
-  "activationEvents": [
-    "onCommand:vscodeUUID.generateUUID"
-  ],
-  "contributes": {
-    "commands": [
-      {
-        "category": "UUID",
-        "command": "vscodeUUID.generateUUID",
-        "title": "Generate new UUID"
-      },
-      {
-        "category": "UUID",
-        "command": "vscodeUUID.generateUUIDWithVersion",
-        "title": "Generate new UUID with version"
-      },
-      {
-        "category": "UUID",
-        "command": "vscodeUUID.generateNilUUID",
-        "title": "Generate nil UUID"
-      }
-    ],
-    "configuration": {
-      "title": "UUID Generator",
-      "properties": {
-        "vscodeUUID.UUIDVersion": {
-          "description": "Specifies the type of UUID to generate.",
-          "type": "string",
-          "default": "v4",
-          "enum": [
-            "v1",
-            "v3",
-            "v4",
-            "v5"
-          ],
-          "enumDescriptions": [
-            "Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs",
-            "Generates namespace-and-name-based (MD5, UUIDv3) UUIDs",
-            "Generates random (UUIDv4) UUIDs",
-            "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs"
-          ]
-        },
-        "vscodeUUID.case": {
-          "description": "Specifies the case to generate the UUID in.",
-          "type": "string",
-          "default": "lower",
-          "enum": [
-            "lower",
-            "upper"
-          ],
-          "enumDescriptions": [
-            "Generates lowercase UUIDs.",
-            "Generates uppercase UUIDs."
-          ]
-        },
-        "vscodeUUID.multiCursorBehavior": {
-          "description": "Specifies the UUID generation behavior when multiple cursor are active.",
-          "type": "string",
-          "default": "unique",
-          "enum": [
-            "unique",
-            "repeat"
-          ],
-          "enumDescriptions": [
-            "Generates a unique UUID for each cursor",
-            "Repeats the same UUID across cursors"
-          ]
-        }
-      }
-    },
-    "menus": {
-      "commandPalette": [
-        {
-          "command": "vscodeUUID.generateUUID"
-        },
-        {
-          "command": "vscodeUUID.generateUUIDWithVersion"
-        },
-        {
-          "command": "vscodeUUID.generateNilUUID"
-        }
-      ]
-    }
-  },
   "displayName": "UUID Generator",
   "engines": {
     "vscode": "^1.74.0"
   },
-  "publisher": "ludwhe"
+  "icon": "icon.png",
+  "keywords": [
+    "guid",
+    "uuid"
+  ],
+  "license": "ISC",
+  "main": "dist/extension.js",
+  "name": "vscode-uuid",
+  "publisher": "ludwhe",
+  "qna": "https://github.com/ludwhe/vscode-uuid/discussions/categories/q-a",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ludwhe/vscode-uuid.git"
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "pretest": "npm run build",
+    "test": "node ./dist/test/runTest.js",
+    "vscode:prepublish": "npm run package",
+    "watch": "tsc -watch -p ./",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch"
+  },
+  "version": "1.0.9"
 }
