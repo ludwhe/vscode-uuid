@@ -9,11 +9,14 @@ Generates UUIDs of any type supported by [uuidjs](https://github.com/uuidjs/uuid
 - Supports "heavy" as well as Web Visual Studio Code ;
 - Supports multi-cursor edition with a configurable behavior: either `unique` (generate a UUID for each cursor) or `repeat` (generate a UUID to repeat across cursors) ;
 - Configurable casing (`lower` or `upper`) ;
-- Two commands : "Generate UUID" (according to configured user preferences) or "Generate UUID with version" (with a prompt for the version to generate).
-
+- Three commands :
+  - "Generate UUID" (according to configured user preferences)
+  - "Generate UUID with version" (with a prompt for the version to generate).
+  - "Generate nil UUID"
+- Offers quick selection of reserved namespaces for v3 and v5 UUIDs.
 
 ## Usage
 
 - Install the extension ;
 - With one or more cursors active in a text document, open the command palette (`Ctrl-Shift-P` or `Cmd-Shift-P`) ;
-- Type "Generate UUID" or "Generate UUID with version" and hit enter.
+- Type in any command name referenced above and hit enter.
