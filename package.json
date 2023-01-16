@@ -135,5 +135,5 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch"
   },
-  "version": "1.0.9"
+  "version": "1.0.10"
 }
