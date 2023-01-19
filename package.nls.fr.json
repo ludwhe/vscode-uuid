@@ -1,7 +1,7 @@
 {
     "vscodeUUID.generateNilUUID.title": "Générer un UUID vide",
     "vscodeUUID.generateUUID.title": "Générer un nouvel UUID",
-    "vscodeUUID.generateUUIDWithVersion.title": "Générer un nouvel UUID de version",
+    "vscodeUUID.generateUUIDWithVersion.title": "Générer un nouvel UUID de version ...",
     "vscodeUUID.case.description": "Indique la casse désirée pour les UUIDs générés.",
     "vscodeUUID.case.lower.enumDescription": "Génère des UUIDs en minuscule.",
     "vscodeUUID.case.upper.enumDescription": "Génère des UUIDs en majuscule.",
