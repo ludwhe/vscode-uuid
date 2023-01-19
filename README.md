@@ -10,9 +10,9 @@ Generates UUIDs of any type supported by [uuidjs](https://github.com/uuidjs/uuid
 - Supports multi-cursor edition with a configurable behavior: either `unique` (generate a UUID for each cursor) or `repeat` (generate a UUID to repeat across cursors) ;
 - Configurable casing (`lower` or `upper`) ;
 - Three commands :
-  - "Generate UUID" (according to configured user preferences)
-  - "Generate UUID with version" (with a prompt for the version to generate).
-  - "Generate nil UUID"
+  - "Generate UUID" (according to configured user preferences) ;
+  - "Generate UUID with version" (with a prompt for the version to generate) ;
+  - "Generate nil UUID".
 - Offers quick selection of reserved namespaces for v3 and v5 UUIDs.
 
 ## Usage
