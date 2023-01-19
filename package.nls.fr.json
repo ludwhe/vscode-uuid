@@ -1,0 +1,16 @@
+{
+    "vscodeUUID.generateNilUUID.title": "Générer un UUID vide",
+    "vscodeUUID.generateUUID.title": "Générer un nouvel UUID",
+    "vscodeUUID.generateUUIDWithVersion.title": "Générer un nouvel UUID de version",
+    "vscodeUUID.case.description": "Indique la casse désirée pour les UUIDs générés.",
+    "vscodeUUID.case.lower.enumDescription": "Génère des UUIDs en minuscule.",
+    "vscodeUUID.case.upper.enumDescription": "Génère des UUIDs en majuscule.",
+    "vscodeUUID.multiCursorBehavior.description": "Indique le comportement de génération lorsque plusieurs curseurs sont actifs.",
+    "vscodeUUID.multiCursorBehavior.unique.enumDescription": "Génère un UUID par curseur.",
+    "vscodeUUID.multiCursorBehavior.repeat.enumDescription": "Répète le même UUID sur tous les curseurs.",
+    "vscodeUUID.UUIDVersion.description": "Indique le type d'UUID à générer.",
+    "vscodeUUID.UUIDVersion.v1.enumDescription": "Génère des UUIDs basés sur l'adresse MAC et l'horodatage (UUIDv1).",
+    "vscodeUUID.UUIDVersion.v3.enumDescription": "Génère des UUIDs basés sur un espace de noms et un nom (MD5, UUIDv3).",
+    "vscodeUUID.UUIDVersion.v4.enumDescription": "Génère des UUIDs aléatoires (UUIDv4).",
+    "vscodeUUID.UUIDVersion.v5.enumDescription": "Génère des UUIDs basés sur un espace de noms et un nom (SHA-1, UUIDv5)."
+}

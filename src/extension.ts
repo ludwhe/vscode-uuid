@@ -1,6 +1,7 @@
 import * as uuid from "uuid";
 import {
   commands,
+  l10n,
   ExtensionContext,
   TextEditor,
   workspace,
@@ -20,11 +21,11 @@ type UUIDMultiCursorBehavior = "unique" | "repeat";
 
 function getUUIDv35Name() {
   return window.showInputBox({
-    prompt: "Enter a name value for the UUID",
-    placeHolder: "Name value for the UUID",
+    prompt: l10n.t("Enter a name value for the UUID"),
+    placeHolder: l10n.t("Name value for the UUID"),
     validateInput(value: string) {
       if (value.length === 0) {
-        return "Please enter a value.";
+        return l10n.t("Please enter a value.");
       }
     },
   });
@@ -50,12 +51,12 @@ async function getUUIDv35Namespace() {
         description: "6ba7b814-9dad-11d1-80b4-00c04fd430c8",
       },
       {
-        label: "Custom ...",
-        description: "Enter your own UUID namespace",
+        label: l10n.t("Custom ..."),
+        description: l10n.t("Enter your own UUID namespace"),
       },
     ],
     {
-      placeHolder: "Namespace value for the UUID",
+      placeHolder: l10n.t("Namespace value for the UUID"),
       canPickMany: false,
     }
   );
@@ -65,11 +66,11 @@ async function getUUIDv35Namespace() {
   if (uuid.validate(ret.description)) return ret.description;
 
   return window.showInputBox({
-    prompt: "Enter a namespace for the UUID",
-    placeHolder: "Namespace value for the UUID",
+    prompt: l10n.t("Enter a namespace for the UUID"),
+    placeHolder: l10n.t("Namespace value for the UUID"),
     validateInput(value: string) {
       if (!uuid.validate(value)) {
-        return "Please enter a valid UUID.";
+        return l10n.t("Please enter a valid UUID.");
       }
     },
   });
@@ -80,14 +81,14 @@ function getUUIDVersion() {
     Object.values(UUIDVersion).map((v, i) => ({
       label: v,
       description: [
-        "Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs",
-        "Generates namespace-and-name-based (MD5, UUIDv3) UUIDs",
-        "Generates random (UUIDv4) UUIDs",
-        "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs",
+        l10n.t("Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs"),
+        l10n.t("Generates namespace-and-name-based (MD5, UUIDv3) UUIDs"),
+        l10n.t("Generates random (UUIDv4) UUIDs"),
+        l10n.t("Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs"),
       ][i],
     })),
     {
-      placeHolder: "Type of UUID to generate",
+      placeHolder: l10n.t("Type of UUID to generate"),
       canPickMany: false,
     }
   );

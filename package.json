@@ -11,50 +11,50 @@
       {
         "category": "UUID",
         "command": "vscodeUUID.generateNilUUID",
-        "title": "Generate nil UUID"
+        "title": "%vscodeUUID.generateNilUUID.title%"
       },
       {
         "category": "UUID",
         "command": "vscodeUUID.generateUUID",
-        "title": "Generate new UUID"
+        "title": "%vscodeUUID.generateUUID.title%"
       },
       {
         "category": "UUID",
         "command": "vscodeUUID.generateUUIDWithVersion",
-        "title": "Generate new UUID with version"
+        "title": "%vscodeUUID.generateUUIDWithVersion.title%"
       }
     ],
     "configuration": {
       "properties": {
         "vscodeUUID.case": {
           "default": "lower",
-          "description": "Specifies the case to generate the UUID in.",
+          "description": "%vscodeUUID.case.description%",
           "enum": [
             "lower",
             "upper"
           ],
           "enumDescriptions": [
-            "Generates lowercase UUIDs.",
-            "Generates uppercase UUIDs."
+            "%vscodeUUID.case.lower.enumDescription%",
+            "%vscodeUUID.case.upper.enumDescription%"
           ],
           "type": "string"
         },
         "vscodeUUID.multiCursorBehavior": {
           "default": "unique",
-          "description": "Specifies the UUID generation behavior when multiple cursor are active.",
+          "description": "%vscodeUUID.multiCursorBehavior.description%",
           "enum": [
             "unique",
             "repeat"
           ],
           "enumDescriptions": [
-            "Generates a unique UUID for each cursor",
-            "Repeats the same UUID across cursors"
+            "%vscodeUUID.multiCursorBehavior.unique.enumDescription%",
+            "%vscodeUUID.multiCursorBehavior.repeat.enumDescription%"
           ],
           "type": "string"
         },
         "vscodeUUID.UUIDVersion": {
           "default": "v4",
-          "description": "Specifies the type of UUID to generate.",
+          "description": "%vscodeUUID.UUIDVersion.description%",
           "enum": [
             "v1",
             "v3",
@@ -62,10 +62,10 @@
             "v5"
           ],
           "enumDescriptions": [
-            "Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs",
-            "Generates namespace-and-name-based (MD5, UUIDv3) UUIDs",
-            "Generates random (UUIDv4) UUIDs",
-            "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs"
+            "%vscodeUUID.UUIDVersion.v1.enumDescription%",
+            "%vscodeUUID.UUIDVersion.v3.enumDescription%",
+            "%vscodeUUID.UUIDVersion.v4.enumDescription%",
+            "%vscodeUUID.UUIDVersion.v5.enumDescription%"
           ],
           "type": "string"
         }
@@ -87,6 +87,7 @@
     }
   },
   "dependencies": {
+    "@vscode/l10n": "^0.0.10",
     "uuid": "^9.0.0"
   },
   "description": "Generates UUIDs (v1, v3, v4, v5) inside your editor.",
@@ -97,6 +98,7 @@
     "@types/vscode": "^1.74.0",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
+    "@vscode/l10n-dev": "^0.0.22",
     "@vscode/test-electron": "^2.2.1",
     "eslint": "^8.29.0",
     "ts-loader": "^9.4.2",
@@ -116,6 +118,7 @@
     "guid",
     "uuid"
   ],
+  "l10n": "./l10n",
   "license": "ISC",
   "main": "dist/extension.js",
   "name": "vscode-uuid",
