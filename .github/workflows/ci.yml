@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: |
         npm ci
-        npx webpack
+        npm run package
     # - name: Test
     #   run: xvfb-run -a npm run test
     - name: Initialize version
