@@ -87,7 +87,6 @@
     }
   },
   "dependencies": {
-    "@vscode/l10n": "^0.0.10",
     "uuid": "^9.0.0"
   },
   "description": "Generates UUIDs (v1, v3, v4, v5) inside your editor.",

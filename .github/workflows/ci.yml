@@ -5,38 +5,40 @@ on:
     branches:
       - main
     tags:
-      - "*.*.*"
+      - "v*.*.*"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 19.x]
-    
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: latest
+        cache: 'npm'
     - name: Build
       run: |
-        npm install
+        npm ci
         npx webpack
     # - name: Test
     #   run: xvfb-run -a npm run test
-    # - name: Package
-    #   run: npm exec vsce -- package ${{ github.ref_name }} --no-git-tag-version
-    # - name: Upload artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: vscode-uuid-${{ github.ref_name }}.vsix
-    #     path: vscode-uuid-${{ github.ref_name }}.vsix
-    # - name: Release
-    #   uses: softprops/action-gh-release@v1
-    #   if: startsWith(github.ref, 'refs/tags/')
-    #   with:
-    #     files: vscode-uuid-${{ github.ref_name }}.vsix
+    - name: Initialize version
+      if: startsWith(github.ref, 'refs/tags/')
+      run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+    - name: Package
+      if: startsWith(github.ref, 'refs/tags/')
+      run: npx vsce -- package
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        name: vscode-uuid-${{ env.VERSION }}.vsix
+        path: vscode-uuid-${{ env.VERSION }}.vsix
+    - name: Publish
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      run: npx vsce -- publish
