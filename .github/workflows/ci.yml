@@ -37,8 +37,13 @@ jobs:
       with:
         name: vscode-uuid-${{ env.VERSION }}.vsix
         path: vscode-uuid-${{ env.VERSION }}.vsix
-    - name: Publish
+    - name: Publish on Visual Studio Marketplace
       if: startsWith(github.ref, 'refs/tags/')
       env:
         VSCE_PAT: ${{ secrets.VSCE_PAT }}
       run: npx vsce -- publish
+    - name: Publish on Open VSX
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      run: npx ovsx -- publish vscode-uuid-${{ env.VERSION }}.vsix -p "$OVSX_PAT"
