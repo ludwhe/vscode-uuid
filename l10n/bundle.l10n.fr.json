@@ -7,9 +7,11 @@
   "Namespace value for the UUID": "Espace de noms de l'UUID",
   "Enter a namespace for the UUID": "Saisir une valeur pour l'espace de noms de l'UUID",
   "Please enter a valid UUID.": "Merci de saisir un UUID valide.",
-  "Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs": "Génère des UUIDs basés sur l'adresse MAC et l'horodatage (UUIDv1)",
+  "Generates node-and-timestamp-based (UUIDv1) UUIDs": "Génère des UUIDs basés sur l'adresse MAC et l'horodatage (UUIDv1)",
   "Generates namespace-and-name-based (MD5, UUIDv3) UUIDs": "Génère des UUIDs basés sur un espace de noms et un nom (MD5, UUIDv3)",
   "Generates random (UUIDv4) UUIDs": "Génère des UUIDs aléatoires (UUIDv4)",
   "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs": "Génère des UUIDs basés sur un espace de noms et un nom (SHA-1, UUIDv5)",
+  "Generates node-and-timestamp-based (UUIDv6) UUIDs": "Génère des UUIDs basés sur l'adresse du nœud et l'horodatage (UUIDv6)",
+  "Generates timestamp-and-randomness-based (UUIDv7) UUIDs": "Génère des UUIDs basés sur l'horodatage et un nombre aléatoire (UUIDv7)",
   "Type of UUID to generate": "Type d'UUID à générer"
 }
