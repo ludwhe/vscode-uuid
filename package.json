@@ -59,13 +59,17 @@
             "v1",
             "v3",
             "v4",
-            "v5"
+            "v5",
+            "v6",
+            "v7"
           ],
           "enumDescriptions": [
             "%vscodeUUID.UUIDVersion.v1.enumDescription%",
             "%vscodeUUID.UUIDVersion.v3.enumDescription%",
             "%vscodeUUID.UUIDVersion.v4.enumDescription%",
-            "%vscodeUUID.UUIDVersion.v5.enumDescription%"
+            "%vscodeUUID.UUIDVersion.v5.enumDescription%",
+            "%vscodeUUID.UUIDVersion.v6.enumDescription%",
+            "%vscodeUUID.UUIDVersion.v7.enumDescription%"
           ],
           "type": "string"
         }
@@ -87,25 +91,25 @@
     }
   },
   "dependencies": {
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
-  "description": "Generates UUIDs (v1, v3, v4, v5) inside your editor.",
+  "description": "Generates UUIDs (v1, v3, v4, v5, v6, v7) inside your editor.",
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.3",
-    "@types/node": "^20.8.3",
-    "@types/uuid": "^9.0.5",
-    "@types/vscode": "^1.83.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.4",
-    "@typescript-eslint/parser": "^6.7.4",
-    "@vscode/l10n-dev": "^0.0.29",
-    "@vscode/test-electron": "^2.3.5",
-    "@vscode/vsce": "^2.21.1",
-    "eslint": "^8.51.0",
-    "ts-loader": "^9.5.0",
-    "ts-node": "^10.9.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.2.2",
-    "webpack": "^5.88.2",
+    "@tsconfig/recommended": "^1.0.7",
+    "@types/node": "^20.14.10",
+    "@types/uuid": "^10.0.0",
+    "@types/vscode": "^1.91.0",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "@vscode/l10n-dev": "^0.0.35",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^2.29.0",
+    "eslint": "^8.56.0",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3",
+    "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4"
   },
   "displayName": "UUID Generator",
