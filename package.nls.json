@@ -9,8 +9,10 @@
     "vscodeUUID.multiCursorBehavior.unique.enumDescription": "Generates a unique UUID for each cursor.",
     "vscodeUUID.multiCursorBehavior.repeat.enumDescription": "Repeats the same UUID across cursors.",
     "vscodeUUID.UUIDVersion.description": "Specifies the type of UUID to generate.",
-    "vscodeUUID.UUIDVersion.v1.enumDescription": "Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs.",
+    "vscodeUUID.UUIDVersion.v1.enumDescription": "Generates node-and-timestamp-based (UUIDv1) UUIDs.",
     "vscodeUUID.UUIDVersion.v3.enumDescription": "Generates namespace-and-name-based (MD5, UUIDv3) UUIDs.",
     "vscodeUUID.UUIDVersion.v4.enumDescription": "Generates random (UUIDv4) UUIDs.",
-    "vscodeUUID.UUIDVersion.v5.enumDescription": "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs."
+    "vscodeUUID.UUIDVersion.v5.enumDescription": "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs.",
+    "vscodeUUID.UUIDVersion.v6.enumDescription": "Generates node-and-timestamp-based (UUIDv6) UUIDs.",
+    "vscodeUUID.UUIDVersion.v7.enumDescription": "Generates timestamp-and-randomness-based (UUIDv7) UUIDs."
 }

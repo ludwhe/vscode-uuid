@@ -14,6 +14,8 @@ enum UUIDVersion {
   v3 = "v3",
   v4 = "v4",
   v5 = "v5",
+  v6 = "v6",
+  v7 = "v7"
 }
 
 type UUIDCase = "lower" | "upper";
@@ -81,10 +83,12 @@ function getUUIDVersion() {
     Object.values(UUIDVersion).map((v, i) => ({
       label: v,
       description: [
-        l10n.t("Generates MAC-address-and-timestamp-based (UUIDv1) UUIDs"),
+        l10n.t("Generates node-and-timestamp-based (UUIDv1) UUIDs"),
         l10n.t("Generates namespace-and-name-based (MD5, UUIDv3) UUIDs"),
         l10n.t("Generates random (UUIDv4) UUIDs"),
         l10n.t("Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs"),
+        l10n.t("Generates node-and-timestamp-based (UUIDv6) UUIDs"),
+        l10n.t("Generates timestamp-and-randomness-based (UUIDv7) UUIDs"),
       ][i],
     })),
     {
@@ -105,7 +109,7 @@ async function generateUUID(version: UUIDVersion) {
     return uuid[version](name, namespace);
   }
 
-  return uuid[version]();
+  return (uuid[version] as () => string)();
 }
 
 async function innerHandler(
