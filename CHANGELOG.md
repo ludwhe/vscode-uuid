@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-01-03
+
+### Added
+
+- Added commands to insert Max and other well-known UUIDs.
+
+### Changed
+
+- Command and configuration ID prefixes are now the same as the extension name.
+- Renamed "Generate Nil UUID" to "Insert Nil UUID".
+- Updated dependencies.
+
+### Fixed
+
+- The preferred generation case now also influences how UUIDs are displayed in quick picks. 
+
 ## [1.2.0] - 2024-07-08
 
 ### Added

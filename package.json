@@ -1,60 +1,65 @@
 {
-  "activationEvents": [
-    "onCommand:vscodeUUID.generateNilUUID",
-    "onCommand:vscodeUUID.generateUUID",
-    "onCommand:vscodeUUID.generateUUIDWithVersion"
-  ],
   "author": "ludwhe",
   "browser": "dist/web/extension.js",
   "contributes": {
     "commands": [
       {
         "category": "UUID",
-        "command": "vscodeUUID.generateNilUUID",
-        "title": "%vscodeUUID.generateNilUUID.title%"
+        "command": "vscode-uuid.insertWellKnownUUID",
+        "title": "%vscode-uuid.insertWellKnownUUID.title%"
       },
       {
         "category": "UUID",
-        "command": "vscodeUUID.generateUUID",
-        "title": "%vscodeUUID.generateUUID.title%"
+        "command": "vscode-uuid.insertMaxUUID",
+        "title": "%vscode-uuid.insertMaxUUID.title%"
       },
       {
         "category": "UUID",
-        "command": "vscodeUUID.generateUUIDWithVersion",
-        "title": "%vscodeUUID.generateUUIDWithVersion.title%"
+        "command": "vscode-uuid.insertNilUUID",
+        "title": "%vscode-uuid.insertNilUUID.title%"
+      },
+      {
+        "category": "UUID",
+        "command": "vscode-uuid.generateUUID",
+        "title": "%vscode-uuid.generateUUID.title%"
+      },
+      {
+        "category": "UUID",
+        "command": "vscode-uuid.generateUUIDWithVersion",
+        "title": "%vscode-uuid.generateUUIDWithVersion.title%"
       }
     ],
     "configuration": {
       "properties": {
-        "vscodeUUID.case": {
+        "vscode-uuid.case": {
           "default": "lower",
-          "description": "%vscodeUUID.case.description%",
+          "description": "%vscode-uuid.case.description%",
           "enum": [
             "lower",
             "upper"
           ],
           "enumDescriptions": [
-            "%vscodeUUID.case.lower.enumDescription%",
-            "%vscodeUUID.case.upper.enumDescription%"
+            "%vscode-uuid.case.lower.enumDescription%",
+            "%vscode-uuid.case.upper.enumDescription%"
           ],
           "type": "string"
         },
-        "vscodeUUID.multiCursorBehavior": {
+        "vscode-uuid.multiCursorBehavior": {
           "default": "unique",
-          "description": "%vscodeUUID.multiCursorBehavior.description%",
+          "description": "%vscode-uuid.multiCursorBehavior.description%",
           "enum": [
             "unique",
             "repeat"
           ],
           "enumDescriptions": [
-            "%vscodeUUID.multiCursorBehavior.unique.enumDescription%",
-            "%vscodeUUID.multiCursorBehavior.repeat.enumDescription%"
+            "%vscode-uuid.multiCursorBehavior.unique.enumDescription%",
+            "%vscode-uuid.multiCursorBehavior.repeat.enumDescription%"
           ],
           "type": "string"
         },
-        "vscodeUUID.UUIDVersion": {
-          "default": "v4",
-          "description": "%vscodeUUID.UUIDVersion.description%",
+        "vscode-uuid.defaultVersion": {
+          "default": "v7",
+          "description": "%vscode-uuid.defaultVersion.description%",
           "enum": [
             "v1",
             "v3",
@@ -64,12 +69,12 @@
             "v7"
           ],
           "enumDescriptions": [
-            "%vscodeUUID.UUIDVersion.v1.enumDescription%",
-            "%vscodeUUID.UUIDVersion.v3.enumDescription%",
-            "%vscodeUUID.UUIDVersion.v4.enumDescription%",
-            "%vscodeUUID.UUIDVersion.v5.enumDescription%",
-            "%vscodeUUID.UUIDVersion.v6.enumDescription%",
-            "%vscodeUUID.UUIDVersion.v7.enumDescription%"
+            "%vscode-uuid.defaultVersion.v1.enumDescription%",
+            "%vscode-uuid.defaultVersion.v3.enumDescription%",
+            "%vscode-uuid.defaultVersion.v4.enumDescription%",
+            "%vscode-uuid.defaultVersion.v5.enumDescription%",
+            "%vscode-uuid.defaultVersion.v6.enumDescription%",
+            "%vscode-uuid.defaultVersion.v7.enumDescription%"
           ],
           "type": "string"
         }
@@ -79,42 +84,47 @@
     "menus": {
       "commandPalette": [
         {
-          "command": "vscodeUUID.generateNilUUID"
+          "command": "vscode-uuid.insertWellKnownUUID"
         },
         {
-          "command": "vscodeUUID.generateUUID"
+          "command": "vscode-uuid.insertMaxUUID"
         },
         {
-          "command": "vscodeUUID.generateUUIDWithVersion"
+          "command": "vscode-uuid.insertNilUUID"
+        },
+        {
+          "command": "vscode-uuid.generateUUID"
+        },
+        {
+          "command": "vscode-uuid.generateUUIDWithVersion"
         }
       ]
     }
   },
   "dependencies": {
-    "uuid": "^10.0.0"
+    "uuid": "^11.0.3"
   },
   "description": "Generates UUIDs (v1, v3, v4, v5, v6, v7) inside your editor.",
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.7",
-    "@types/node": "^20.14.10",
-    "@types/uuid": "^10.0.0",
-    "@types/vscode": "^1.91.0",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
-    "@typescript-eslint/parser": "^7.15.0",
+    "@tsconfig/recommended": "^1.0.8",
+    "@types/node": "^22.10.5",
+    "@types/vscode": "^1.96.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
     "@vscode/l10n-dev": "^0.0.35",
     "@vscode/test-electron": "^2.4.1",
-    "@vscode/vsce": "^2.29.0",
-    "eslint": "^8.56.0",
+    "@vscode/vsce": "^3.2.1",
+    "eslint": "^9.17.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "tslib": "^2.6.3",
-    "typescript": "^5.5.3",
-    "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4"
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   },
   "displayName": "UUID Generator",
   "engines": {
-    "vscode": "^1.91.0"
+    "vscode": "^1.96.0"
   },
   "icon": "icon.png",
   "keywords": [

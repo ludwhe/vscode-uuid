@@ -13,5 +13,9 @@
   "Generates namespace-and-name-based (SHA-1, UUIDv5) UUIDs": "Génère des UUIDs basés sur un espace de noms et un nom (SHA-1, UUIDv5)",
   "Generates node-and-timestamp-based (UUIDv6) UUIDs": "Génère des UUIDs basés sur l'adresse du nœud et l'horodatage (UUIDv6)",
   "Generates timestamp-and-randomness-based (UUIDv7) UUIDs": "Génère des UUIDs basés sur l'horodatage et un nombre aléatoire (UUIDv7)",
-  "Type of UUID to generate": "Type d'UUID à générer"
+  "Type of UUID to generate": "Type d'UUID à générer",
+  "{0} namespace ID": "ID d'espace de noms {0}",
+  "Nil": "Nil",
+  "Max": "Max",
+  "Well-known UUID": "UUID usuel"
 }
