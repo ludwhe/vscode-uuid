@@ -9,7 +9,7 @@ Generates UUIDs of any type supported by [uuidjs](https://github.com/uuidjs/uuid
 - Supports desktop as well as Web Visual Studio Code ;
 - Supports multi-cursor edition with a configurable behavior: either `unique` (generate a UUID for each cursor) or `repeat` (generate a UUID to repeat across cursors) ;
 - Configurable casing (`lower` or `upper`) ;
-- Three commands :
+- Five commands :
   - "Generate UUID" (according to configured user preferences) ;
   - "Generate UUID with version" (with a prompt for the version to generate) ;
   - "Insert Nil UUID" ;
