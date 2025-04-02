@@ -151,5 +151,5 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch"
   },
-  "version": "2.0.0"
+  "version": "2.0.1"
 }
