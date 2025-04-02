@@ -1,16 +1,21 @@
 {
-    "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
         "importHelpers": true,
         "outDir": "dist",
         "removeComments": true
     },
-    "include": [
-        "src/**/*"
-    ],
     "exclude": [
         ".vscode-test",
         "node_modules",
         "**/*.spec.ts"
-    ]
+    ],
+    "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
+    "include": [
+        "src/**/*"
+    ],
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    }
 }

@@ -1,7 +1,7 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import webpack from 'webpack';
 
-const config: Configuration = {
+const config: webpack.Configuration = {
     target: 'node',
     entry: './src/extension.ts',
     output: {
@@ -35,7 +35,7 @@ const config: Configuration = {
     }
 };
 
-const browserConfig: Configuration = {
+const browserConfig: webpack.Configuration = {
     ...config,
     target: 'webworker',
     output: {
