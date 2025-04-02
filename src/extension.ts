@@ -223,9 +223,9 @@ async function insertWellKnownUUID(textEditor: TextEditor) {
     await textEditor.edit((edit) => {
       selection.isEmpty
         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          edit.insert(selection.active, toInsert!)
+          edit.insert(selection.active, toInsert)
         : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          edit.replace(selection, toInsert!);
+          edit.replace(selection, toInsert);
     });
   }
 }

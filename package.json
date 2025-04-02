@@ -1,6 +1,6 @@
 {
   "author": "ludwhe",
-  "browser": "dist/web/extension.js",
+  "browser": "dist/web/extension.cjs",
   "contributes": {
     "commands": [
       {
@@ -102,29 +102,27 @@
     }
   },
   "dependencies": {
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   },
   "description": "Generates UUIDs (v1, v3, v4, v5, v6, v7) inside your editor.",
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.8",
-    "@types/node": "^22.13.17",
-    "@types/vscode": "^1.98.0",
-    "@typescript-eslint/eslint-plugin": "^8.29.0",
-    "@typescript-eslint/parser": "^8.29.0",
+    "@tsconfig/recommended": "^1.0.13",
+    "@types/node": "^24.10.1",
+    "@types/vscode": "^1.106.1",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
     "@vscode/l10n-dev": "^0.0.35",
-    "@vscode/test-electron": "^2.4.1",
-    "@vscode/vsce": "^3.3.2",
-    "eslint": "^9.23.0",
-    "ts-loader": "^9.5.2",
+    "@vscode/test-web": "^0.0.78",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.1",
     "ts-node": "^10.9.2",
     "tslib": "^2.8.1",
-    "typescript": "^5.8.2",
-    "webpack": "^5.98.0",
-    "webpack-cli": "^6.0.1"
+    "typescript": "^5.9.3"
   },
   "displayName": "UUID Generator",
   "engines": {
-    "vscode": "^1.98.0"
+    "vscode": "^1.106.1"
   },
   "icon": "icon.png",
   "keywords": [
@@ -133,7 +131,7 @@
   ],
   "l10n": "./l10n",
   "license": "ISC",
-  "main": "dist/extension.js",
+  "main": "dist/extension.cjs",
   "name": "vscode-uuid",
   "publisher": "ludwhe",
   "qna": "https://github.com/ludwhe/vscode-uuid/discussions/categories/q-a",
@@ -142,14 +140,13 @@
     "url": "https://github.com/ludwhe/vscode-uuid.git"
   },
   "scripts": {
-    "build": "tsc -p ./",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "pretest": "npm run build",
-    "test": "node ./dist/test/runTest.js",
-    "vscode:prepublish": "npm run package",
-    "watch": "tsc -watch -p ./",
-    "webpack": "webpack --mode development",
-    "webpack-dev": "webpack --mode development --watch"
+    "build": "tsc -b && node ./esbuild.mjs",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "test-web": "vscode-test-web --extensionDevelopmentPath=. .",
+    "vscode:prepublish": "npm run build",
+    "watch": "npm run build --watch"
   },
-  "version": "2.0.0"
+  "type": "module",
+  "version": "2.0.1"
 }

@@ -1,12 +1,24 @@
 {
-    "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
-        "importHelpers": true,
-        "outDir": "dist",
-        "removeComments": true
+        "module": "Node16",
+        "moduleResolution": "Node16",
+        "target": "ES2022",
+        "noEmit": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "isolatedModules": false,
+        "allowSyntheticDefaultImports": true,
+        "allowUmdGlobalAccess": true, // For D3.js
+        "strictNullChecks": true,
+        "alwaysStrict": true,
+        "skipLibCheck": true,
     },
+    "compileOnSave": true,
     "include": [
-        "src/**/*"
+        "src/**/*.ts"
     ],
     "exclude": [
         ".vscode-test",
