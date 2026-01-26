@@ -1,12 +1,11 @@
 import * as uuid from "uuid";
 import {
   commands,
-  l10n,
   ExtensionContext,
+  l10n,
   TextEditor,
-  workspace,
   window,
-  TextEditorEdit,
+  workspace,
 } from "vscode";
 
 enum UUIDVersion {
@@ -20,6 +19,9 @@ enum UUIDVersion {
 
 type UUIDCase = "lower" | "upper";
 type UUIDMultiCursorBehavior = "unique" | "repeat";
+
+const defaultFormat = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+const formatSubstitution = /(?<!\\)x/g;
 
 const namespaceIDs = [
   {
@@ -52,12 +54,12 @@ function getUUIDv35Name() {
   });
 }
 
-async function getUUIDv35Namespace(uuidCase: UUIDCase) {
+async function getUUIDv35Namespace() {
   const ret = await window.showQuickPick(
     [
       ...namespaceIDs.map(el => ({
         label: el.label,
-        description: (uuidCase === "upper") ? el.description.toUpperCase() : el.description
+        description: el.description
       })),
       {
         label: l10n.t("Custom ..."),
@@ -105,100 +107,26 @@ function getUUIDVersion() {
   );
 }
 
-async function generateUUID(version: UUIDVersion, uuidCase: UUIDCase) {
-  let ret: string;
-
+async function generateUUID(version: UUIDVersion) {
   if (version === "v3" || version === "v5") {
-    const namespace = await getUUIDv35Namespace(uuidCase);
+    const namespace = await getUUIDv35Namespace();
     if (namespace == null) return;
 
     const name = await getUUIDv35Name();
     if (name == null) return;
 
-    ret = uuid[version](name, namespace);
+    return uuid[version](name, namespace);
   } else {
-    ret = (uuid[version] as () => string)();
-  }
-
-  return (uuidCase === "upper") ? ret.toUpperCase() : ret;
-}
-
-async function innerHandler(
-  textEditor: TextEditor,
-  uuidVersion: UUIDVersion,
-  uuidCase: UUIDCase,
-  multiCursorBehavior: UUIDMultiCursorBehavior
-) {
-  let newUUID = await generateUUID(uuidVersion, uuidCase);
-  for (const [index, selection] of textEditor.selections.entries()) {
-    if (index > 0 && multiCursorBehavior == "unique") {
-      newUUID = await generateUUID(uuidVersion, uuidCase);
-    }
-
-    if (newUUID == null) return;
-
-    await textEditor.edit((edit) => {
-      selection.isEmpty
-        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          edit.insert(selection.active, newUUID!)
-        : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          edit.replace(selection, newUUID!);
-    });
+    return (uuid[version] as () => string)();
   }
 }
 
-// we can't use the provided TextEditorEdit as the new value is computed asynchronously.
-async function generateUUIDHandler(textEditor: TextEditor) {
-  const configuration = workspace.getConfiguration("vscode-uuid");
-  const uuidVersion = configuration.get("defaultVersion") as UUIDVersion;
-  const uuidCase = configuration.get("case") as UUIDCase;
-  const multiCursorBehavior = configuration.get(
-    "multiCursorBehavior"
-  ) as UUIDMultiCursorBehavior;
-
-  await innerHandler(textEditor, uuidVersion, uuidCase, multiCursorBehavior);
-}
-
-// we can't use the provided TextEditorEdit as the new value is computed asynchronously.
-async function generateUUIDWithVersionHandler(textEditor: TextEditor) {
-  const configuration = workspace.getConfiguration("vscode-uuid");
-  const uuidCase = configuration.get("case") as UUIDCase;
-  const multiCursorBehavior = configuration.get(
-    "multiCursorBehavior"
-  ) as UUIDMultiCursorBehavior;
-
-  const uuidVersion = (await getUUIDVersion())?.label;
-  if (uuidVersion == null) return;
-
-  await innerHandler(textEditor, uuidVersion, uuidCase, multiCursorBehavior);
-}
-
-function insertUUID(value: string) {
-  const configuration = workspace.getConfiguration("vscode-uuid");
-  const uuidCase = configuration.get("case") as UUIDCase;
-
-  const toInsert = (uuidCase === "upper") ? value.toUpperCase() : value;
-
-  return (textEditor: TextEditor, edit: TextEditorEdit) => {
-    for (const selection of textEditor.selections) {
-      if (selection.isEmpty) {
-        edit.insert(selection.active, toInsert);
-      } else {
-        edit.replace(selection, toInsert);
-      }
-    }
-  }
-}
-
-async function insertWellKnownUUID(textEditor: TextEditor) {
-  const configuration = workspace.getConfiguration("vscode-uuid");
-  const uuidCase = configuration.get("case") as UUIDCase;
-
+async function getWellKnownUUID() {
   const value = await window.showQuickPick(
     [
       ...namespaceIDs.map(el => ({
         label: l10n.t('{0} namespace ID', el.label),
-        description: (uuidCase === "upper") ? el.description.toUpperCase() : el.description
+        description: el.description
       })),
       {
         label: l10n.t("Nil"),
@@ -206,7 +134,7 @@ async function insertWellKnownUUID(textEditor: TextEditor) {
       },
       {
         label: l10n.t("Max"),
-        description: (uuidCase === "upper") ? uuid.MAX.toUpperCase() : uuid.MAX,
+        description: uuid.MAX
       },
     ],
     {
@@ -215,42 +143,89 @@ async function insertWellKnownUUID(textEditor: TextEditor) {
     }
   );
 
-  if (value == null) return;
+  return value?.description;
+}
 
-  const toInsert = (uuidCase === "upper") ? value.description.toUpperCase() : value.description;
+function formatValue(value: string, format: string) {
+  let index = 0;
+  const noHyphen = value.replaceAll("-", "");
 
-  for (const selection of textEditor.selections) {
-    await textEditor.edit((edit) => {
-      selection.isEmpty
-        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          edit.insert(selection.active, toInsert)
-        : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          edit.replace(selection, toInsert);
-    });
-  }
+  return format.replaceAll(formatSubstitution, s => {
+    if (index >= noHyphen.length) return s;
+
+    return noHyphen[index++];
+  }).replaceAll(String.raw`\x`, "x")
+}
+
+function handler(getValue: () => Thenable<string | undefined>) {
+  const configuration = workspace.getConfiguration("vscode-uuid");
+  const multiCursorBehavior = configuration.get(
+    "multiCursorBehavior"
+  ) as UUIDMultiCursorBehavior;
+  const uuidCase = configuration.get("uuidCase") as UUIDCase;
+  const format = configuration.get("format") as string;
+
+  return async (textEditor: TextEditor) => {
+    let value = await getValue();
+
+    if (value == null) return;
+
+    for (const [index, selection] of textEditor.selections.entries()) {
+      if (index > 0 && multiCursorBehavior == "unique") {
+        value = await getValue();
+      }
+
+      if (value == null) return;
+
+      if (uuidCase == "upper") {
+        value = value.toUpperCase();
+      }
+
+      if (format != defaultFormat) {
+        value = formatValue(value, format);
+      }
+
+      if (selection.isEmpty) {
+        await textEditor.edit(edit => edit.insert(selection.active, value!));
+      } else {
+        await textEditor.edit(edit => edit.replace(selection, value!));
+      }
+    }
+  };
 }
 
 export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerTextEditorCommand(
       "vscode-uuid.generateUUID",
-      generateUUIDHandler
+      handler(async () => {
+        const configuration = workspace.getConfiguration("vscode-uuid");
+        const uuidVersion = configuration.get("defaultVersion") as UUIDVersion;
+
+        return await generateUUID(uuidVersion);
+      })
     ),
     commands.registerTextEditorCommand(
       "vscode-uuid.generateUUIDWithVersion",
-      generateUUIDWithVersionHandler
+      handler(async () => {
+        const uuidVersion = await getUUIDVersion();
+
+        if (uuidVersion == null) return;
+
+        return await generateUUID(uuidVersion.label);
+      })
     ),
     commands.registerTextEditorCommand(
       "vscode-uuid.insertNilUUID",
-      insertUUID(uuid.NIL)
+      handler(() => Promise.resolve(uuid.NIL))
     ),
     commands.registerTextEditorCommand(
       "vscode-uuid.insertMaxUUID",
-      insertUUID(uuid.MAX)
+      handler(() => Promise.resolve(uuid.MAX))
     ),
     commands.registerTextEditorCommand(
       "vscode-uuid.insertWellKnownUUID",
-      insertWellKnownUUID
+      handler(getWellKnownUUID)
     )
   );
 }

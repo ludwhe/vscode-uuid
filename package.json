@@ -44,6 +44,11 @@
           ],
           "type": "string"
         },
+        "vscode-uuid.format": {
+          "default": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "description": "%vscode-uuid.format.description%",
+          "type": "string"
+        },
         "vscode-uuid.multiCursorBehavior": {
           "default": "unique",
           "description": "%vscode-uuid.multiCursorBehavior.description%",

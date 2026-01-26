@@ -7,6 +7,7 @@
     "vscode-uuid.case.description": "Indique la casse désirée pour les UUIDs générés.",
     "vscode-uuid.case.lower.enumDescription": "Génère des UUIDs en minuscule.",
     "vscode-uuid.case.upper.enumDescription": "Génère des UUIDs en majuscule.",
+    "vscode-uuid.format.description": "Indique le format désiré pour les UUIDs générés. Les 32 premiers \"x\"s dans le format seront remplacés par un caractère hexadécimal de l'UUID. Si le format doit inclure un \"x\" (avant les 32 autres), celui-ci doit être échappé avec \"\\\"",
     "vscode-uuid.multiCursorBehavior.description": "Indique le comportement de génération lorsque plusieurs curseurs sont actifs.",
     "vscode-uuid.multiCursorBehavior.unique.enumDescription": "Génère un UUID par curseur.",
     "vscode-uuid.multiCursorBehavior.repeat.enumDescription": "Répète le même UUID sur tous les curseurs.",
