@@ -45,7 +45,7 @@
           "type": "string"
         },
         "vscode-uuid.format": {
-          "default": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "default": "xxxx-xx-xx-xx-xxxxxx",
           "description": "%vscode-uuid.format.description%",
           "type": "string"
         },
@@ -153,5 +153,5 @@
     "watch": "npm run build --watch"
   },
   "type": "module",
-  "version": "2.0.1"
+  "version": "2.1.0"
 }
