@@ -7,9 +7,10 @@ export function formatValue(value: Uint8Array, format: string, uuidCase: UUIDCas
 
   // TODO: remove when adding support for more format specifiers
   const valueString = stringify(value).replaceAll("-", "");
+  const insert = uuidCase === "upper" ? valueString.toUpperCase() : valueString;
 
   const flen = format.length;
-  const vlen = valueString.length;
+  const vlen = insert.length;
   let i = 0;
   for (let j = 0; i < flen && j < vlen; i++) {
     const c = format[i];
@@ -29,8 +30,8 @@ export function formatValue(value: Uint8Array, format: string, uuidCase: UUIDCas
           escape = true;
           continue;
         case "x":
-          ret += valueString[j++];
-          ret += valueString[j++];
+          ret += insert[j++];
+          ret += insert[j++];
           continue;
         default:
           ret += c;

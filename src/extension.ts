@@ -51,12 +51,12 @@ function getUUIDv35Name() {
   });
 }
 
-async function getUUIDv35Namespace() {
+async function getUUIDv35Namespace(uuidCase: UUIDCase) {
   const ret = await window.showQuickPick(
     [
       ...namespaceIDs.map(el => ({
         label: el.label,
-        description: el.description
+        description: uuidCase === "upper" ? el.description.toUpperCase() : el.description
       })),
       {
         label: l10n.t("Custom ..."),
@@ -106,9 +106,9 @@ async function getUUIDVersion() {
   return version?.label as UUIDVersion;
 }
 
-async function generateUUIDv35(version: UUIDv35Version) {
+async function generateUUIDv35(version: UUIDv35Version, uuidCase: UUIDCase) {
   const buf = new Uint8Array(16);
-  const namespace = await getUUIDv35Namespace();
+  const namespace = await getUUIDv35Namespace(uuidCase);
   if (namespace == null) return;
 
   const name = await getUUIDv35Name();
@@ -122,20 +122,20 @@ function generateBaseUUID(version: UUIDBaseVersion) {
   return (uuid[version] as (options: any, buf: Uint8Array) => Uint8Array)(undefined, buf);
 }
 
-async function getWellKnownUUID() {
+async function getWellKnownUUID(uuidCase: UUIDCase) {
   const value = await window.showQuickPick(
     [
       ...namespaceIDs.map(el => ({
         label: l10n.t("{0} namespace ID", el.label),
-        description: el.description
+        description: uuidCase === "upper" ? el.description.toUpperCase() : el.description
       })),
       {
         label: l10n.t("Nil"),
-        description: uuid.NIL,
+        description: uuidCase === "upper" ? uuid.NIL.toUpperCase() : uuid.NIL
       },
       {
         label: l10n.t("Max"),
-        description: uuid.MAX
+        description: uuidCase === "upper" ? uuid.MAX.toUpperCase() : uuid.MAX
       },
     ],
     {
@@ -185,13 +185,12 @@ function getConfig() {
   const configuration = workspace.getConfiguration("vscode-uuid");
   return {
     multiCursorBehavior: configuration.get<UUIDMultiCursorBehavior>("multiCursorBehavior"),
-    uuidCase: configuration.get<UUIDCase>("uuidCase")!,
+    uuidCase: configuration.get<UUIDCase>("case")!,
     format: configuration.get<string>("format")!,
   };
 }
 
 function getString(value: string | Uint8Array, format: string, uuidCase: UUIDCase) {
-  let ret: string;
   if (typeof value === "string") {
     if (format === defaultFormat) {
       return uuidCase === "upper" ? value.toUpperCase() : value;
@@ -213,11 +212,11 @@ function handleString(value: string): (editor: TextEditor) => Promise<void> {
   };
 }
 
-function handleAsyncString(valueGetter: () => Promise<string | undefined>): (editor: TextEditor) => Promise<void> {
+function handleAsyncString(valueGetter: (uuidCase: UUIDCase) => Promise<string | undefined>): (editor: TextEditor) => Promise<void> {
   return async (editor: TextEditor) => {
     const config = getConfig();
 
-    const value = await valueGetter();
+    const value = await valueGetter(config.uuidCase);
     if (value == null) return;
 
     return await edit(editor, getString(value, config.format, config.uuidCase));
@@ -233,7 +232,7 @@ function handle(versionGetter: () => Thenable<UUIDVersion | undefined>): (editor
 
     if (version === "v3" || version === "v5") {
       await edit(editor, async () => {
-        const value = await generateUUIDv35(version);
+        const value = await generateUUIDv35(version, config.uuidCase);
         if (value == null) return;
 
         return getString(value, config.format, config.uuidCase);
