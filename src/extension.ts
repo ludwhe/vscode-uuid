@@ -2,6 +2,7 @@ import * as uuid from "uuid";
 
 import {
   commands,
+  ConfigurationScope,
   ExtensionContext,
   l10n,
   TextEditor,
@@ -181,8 +182,8 @@ async function edit(editor: TextEditor, value: string | string[] | (() => Thenab
   }
 }
 
-function getConfig() {
-  const configuration = workspace.getConfiguration("vscode-uuid");
+function getConfig(scope: ConfigurationScope) {
+  const configuration = workspace.getConfiguration("vscode-uuid", scope);
   return {
     multiCursorBehavior: configuration.get<UUIDMultiCursorBehavior>("multiCursorBehavior"),
     uuidCase: configuration.get<UUIDCase>("case")!,
@@ -207,14 +208,14 @@ function getString(value: string | Uint8Array, format: string, uuidCase: UUIDCas
 
 function handleString(value: string): (editor: TextEditor) => Promise<void> {
   return async (editor: TextEditor) => {
-    const config = getConfig();
+    const config = getConfig(editor.document.uri);
     return await edit(editor, getString(value, config.format, config.uuidCase));
   };
 }
 
 function handleAsyncString(valueGetter: (uuidCase: UUIDCase) => Promise<string | undefined>): (editor: TextEditor) => Promise<void> {
   return async (editor: TextEditor) => {
-    const config = getConfig();
+    const config = getConfig(editor.document.uri);
 
     const value = await valueGetter(config.uuidCase);
     if (value == null) return;
@@ -225,7 +226,7 @@ function handleAsyncString(valueGetter: (uuidCase: UUIDCase) => Promise<string |
 
 function handle(versionGetter: () => Thenable<UUIDVersion | undefined>): (editor: TextEditor) => Promise<void> {
   return async (editor: TextEditor) => {
-    const config = getConfig();
+    const config = getConfig(editor.document.uri);
 
     const version = await versionGetter();
     if (version == null) return;
@@ -254,8 +255,8 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerTextEditorCommand(
       "vscode-uuid.generateUUID",
-      handle(async () => {
-        const configuration = workspace.getConfiguration("vscode-uuid");
+      (editor) => handle(async () => {
+        const configuration = workspace.getConfiguration("vscode-uuid", editor.document.uri);
         return configuration.get<UUIDVersion>("defaultVersion");
       })
     ),
